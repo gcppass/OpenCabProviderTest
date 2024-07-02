@@ -10,6 +10,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.opencabstandard.provider.VehicleInformationContract;
+
 /**
  * An abstract ContentProvider that implements the {@link VehicleInformationContract}. The provider app can choose
  * to implement the full ContentProvider or to extend this class.  If extending this class it only needs
@@ -109,30 +111,29 @@ public abstract class AbstractVehicleInformationProvider extends ContentProvider
     @Nullable
     @Override
     public Bundle call(@NonNull String method, @Nullable String version, @Nullable Bundle extras) {
-//        Bundle result = new Bundle();
-//        Log.i(LOG_TAG, "Method name: " + method + ", version: " + version);
-//
-//        switch (method) {
-//            case VehicleInformationContract.METHOD_GET_VEHICLE_INFORMATION:
-//                try {
-//                    VehicleInformationContract.VehicleInformation vehicle = getVehicleInformation(version);
-//                    if (vehicle != null) {
-//                        result.putParcelable(VehicleInformationContract.KEY_VEHICLE_INFORMATION, vehicle);
-//                        result.putString(VehicleInformationContract.KEY_VERSION, "0.2");
-//                    } else {
-//                        result.putString(VehicleInformationContract.KEY_ERROR, "Sorry, we are unable to fetch the current vehicle information");
-//                    }
-//                } catch (RuntimeException e) {
-//                    result.putString(VehicleInformationContract.KEY_ERROR, e.getMessage());
-//                }
-//                break;
-//            default:
-//                Log.w(LOG_TAG, "Unrecognized method name: " + method);
-//                result.putString(IdentityContract.KEY_ERROR, "The provided method was not recognized: " + method);
-//        }
-//
-//        return result;
-        return new Bundle();
+        Bundle result = new Bundle();
+        Log.i(LOG_TAG, "Method name: " + method + ", version: " + version);
+
+        switch (method) {
+            case VehicleInformationContract.METHOD_GET_VEHICLE_INFORMATION:
+                try {
+                    VehicleInformationContract.VehicleInformation vehicle = getVehicleInformation(version);
+                    if (vehicle != null) {
+                        result.putParcelable(VehicleInformationContract.KEY_VEHICLE_INFORMATION, vehicle);
+                        result.putString(VehicleInformationContract.KEY_VERSION, "0.2");
+                    } else {
+                        result.putString(VehicleInformationContract.KEY_ERROR, "Sorry, we are unable to fetch the current vehicle information");
+                    }
+                } catch (RuntimeException e) {
+                    result.putString(VehicleInformationContract.KEY_ERROR, e.getMessage());
+                }
+                break;
+            default:
+                Log.w(LOG_TAG, "Unrecognized method name: " + method);
+                result.putString(IdentityContract.KEY_ERROR, "The provided method was not recognized: " + method);
+        }
+
+        return result;
     }
 
     /**

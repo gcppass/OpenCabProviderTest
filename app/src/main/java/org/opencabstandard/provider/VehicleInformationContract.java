@@ -1,4 +1,4 @@
-package com.example.opencapprovidertest;
+package org.opencabstandard.provider;
 
 import android.os.Bundle;
 import android.os.Parcel;
@@ -127,16 +127,6 @@ public final class VehicleInformationContract {
      *
      * <p>
      * Example:
-     * <pre>
-     * <code class="language-java">
-     *     {@link android.content.ContentResolver} resolver = getApplicationContext().getContentResolver();
-     *     {@link Bundle} result = resolver.call(Uri.parse("content://" + {@link //HOSContract}.AUTHORITY),
-     *                                  {@link VehicleInformationContract}.METHOD_GET_LOGIN_CREDENTIALS,
-     *                                  {@link IdentityContract}.VERSION,
-     *                                  null);
-     *     String version = result.getBoolean({@link IdentityContract}.METHOD_GET_VEHICLE_INFORMATION);
-     * </code>
-     * </pre>
      */
     public static final String KEY_VERSION = "key_version";
 
@@ -149,7 +139,7 @@ public final class VehicleInformationContract {
      */
     public static class VehicleInformation implements Parcelable {
 
-        private String vin = "1M2AX07Y79M006004";
+        private String vin;
         private String vehicleId;
         private boolean inGear;
 

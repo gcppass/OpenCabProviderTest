@@ -8,8 +8,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.core.os.bundleOf
-import com.example.opencapprovidertest.VehicleInformationContract.VehicleInformation
-
+import org.opencabstandard.provider.VehicleInformationContract
 
 class Util {
     enum class ReceiverType(val contractName: String) {
@@ -21,7 +20,7 @@ class Util {
             Log.d("OpenCabVehicleInfoProvider", "SendBroadcast Function, $context")
             val receivers = getReceivers(context, receiverType.contractName)
             val action = if(receiverType == ReceiverType.VEHICLE_INFORMATION) {
-                VehicleInformationContract.ACTION_VEHICLE_INFORMATION_CHANGED
+                "com.opencabstandard.VEHICLE_INFORMATION_CHANGED"
             } else {
                 IdentityContract.ACTION_IDENTITY_INFORMATION_CHANGED
 
@@ -32,7 +31,7 @@ class Util {
                 val intent = Intent()
                 intent.setComponent(ComponentName(activityInfo.packageName, key))
                 intent.putExtras(bundleOf(
-                    VehicleInformationContract.KEY_VEHICLE_INFORMATION to VehicleInformation()
+                    VehicleInformationContract.KEY_VEHICLE_INFORMATION to VehicleInformationContract.VehicleInformation()
                 ))
                 intent.setAction(action)
                 Log.d("OpenCabVehicleInfoProvider", intent.toString())

@@ -41,7 +41,7 @@
         <provider android:authorities="com.example.opencapprovidertest.org.opencabstandard.vehicleinformation"
             android:exported="true"
             android:label="vehicleinformation"
-            android:name="com.example.opencapprovidertest.opencab.VehicleInformationProvider">
+            android:name="com.example.opencapprovidertest.VehicleInformationProvider">
         </provider>
     </application>
 
