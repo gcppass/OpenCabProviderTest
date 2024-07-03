@@ -12,9 +12,22 @@ public class VehicleInformationProvider extends AbstractVehicleInformationProvid
         Log.d(LOG_TAG, "getVehicleInformation()");
 
         VehicleInformationContract.VehicleInformation vehicleInformation = new VehicleInformationContract.VehicleInformation();
+        if (CurrentVin.getInstance().getVin() != null) {
+            vehicleInformation.setVin(CurrentVin.getInstance().getVin());
+        }
         vehicleInformation.setVehicleId("Great Vehicle ID 1");
-        vehicleInformation.setVin("1GB4YSE74LF293614");
         vehicleInformation.setInGear(true);
+
+        printVehicleInformation(vehicleInformation);
         return vehicleInformation;
+    }
+
+    private void printVehicleInformation(VehicleInformationContract.VehicleInformation vehicleInformation) {
+        String vinIsNullSuffix = "false";
+        if (vehicleInformation.getVin() == null) {
+            vinIsNullSuffix = "true";
+        }
+
+        Log.d(LOG_TAG, "VIN IS NULL" + vinIsNullSuffix);
     }
 }

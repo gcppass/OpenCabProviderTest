@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -55,7 +56,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun VinUpdateUI(modifier: Modifier = Modifier, context: Context) {
-    var vin by remember { mutableStateOf("") }
+    var vinTextFieldValue by remember { mutableStateOf("") }
 
     Column(modifier = modifier.padding(16.dp)) {
         Text(text = "Set VIN", fontSize = 20.sp)
@@ -65,21 +66,33 @@ fun VinUpdateUI(modifier: Modifier = Modifier, context: Context) {
             border = BorderStroke(1.dp, Color.Gray)
         ) {
             BasicTextField(
-                value = vin,
+                value = vinTextFieldValue,
                 onValueChange = {
-                    vin = it
-                    CurrentVin.setVin(vin)
+                    vinTextFieldValue = it
+                    CurrentVin.setCurrentVin(vinTextFieldValue)
                 },
                 modifier = Modifier.fillMaxWidth().padding(8.dp)
             )
         }
-        Button(
-            onClick = {
-                Util.sendIntent(context, Util.ReceiverType.VEHICLE_INFORMATION)
-            },
-            modifier = Modifier.padding(top = 8.dp)
-        ) {
-            Text("Set VIN")
+
+        Row {
+            Button(
+                onClick = {
+                    Util.sendIntent(context, Util.ReceiverType.VEHICLE_INFORMATION)
+                },
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text("Set VIN")
+            }
+            Button(
+                onClick = {
+                    CurrentVin.setCurrentVin(null)
+                    vinTextFieldValue = ""
+                },
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text("Reset VIN")
+            }
         }
     }
 }

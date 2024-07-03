@@ -1,10 +1,14 @@
 package com.example.opencapprovidertest
 
 class CurrentVin {
-    private var vin: String = ""
+    var vin: String? = null
 
     companion object {
         private var instance: CurrentVin? = null
+
+        fun setCurrentVin(vin: String?) {
+            getInstance().vin = vin
+        }
 
         @JvmStatic
         @Synchronized
@@ -15,14 +19,6 @@ class CurrentVin {
                 }
             }
             return instance!!
-        }
-
-        fun setVin(vin: String) {
-            getInstance().vin = vin
-        }
-
-        fun getVin(): String {
-            return getInstance().vin
         }
     }
 }
