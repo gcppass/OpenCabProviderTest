@@ -5,7 +5,7 @@ import android.util.Log;
 import org.opencabstandard.provider.VehicleInformationContract;
 
 public class VehicleInformationProvider extends AbstractVehicleInformationProvider {
-    private static final String LOG_TAG = "ANIBAL";
+    private static final String LOG_TAG = "VehicleInformationProvider";
 
     @Override
     public VehicleInformationContract.VehicleInformation getVehicleInformation(String version) {

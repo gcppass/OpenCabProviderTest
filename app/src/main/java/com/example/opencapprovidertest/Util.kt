@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.core.os.bundleOf
 import org.opencabstandard.provider.VehicleInformationContract
 
@@ -16,11 +15,10 @@ class Util {
         IDENTITY("IdentityChangedReceiver")
     }
     companion object {
-        fun sendBroadcastEvent(context: Context, receiverType: ReceiverType) {
-            Log.d("OpenCabVehicleInfoProvider", "SendBroadcast Function, $context")
+        fun sendIntent(context: Context, receiverType: ReceiverType) {
             val receivers = getReceivers(context, receiverType.contractName)
             val action = if(receiverType == ReceiverType.VEHICLE_INFORMATION) {
-                "com.opencabstandard.VEHICLE_INFORMATION_CHANGED"
+                VehicleInformationContract.ACTION_VEHICLE_INFORMATION_CHANGED
             } else {
                 IdentityContract.ACTION_IDENTITY_INFORMATION_CHANGED
 
@@ -34,7 +32,6 @@ class Util {
                     VehicleInformationContract.KEY_VEHICLE_INFORMATION to VehicleInformationContract.VehicleInformation()
                 ))
                 intent.setAction(action)
-                Log.d("OpenCabVehicleInfoProvider", intent.toString())
                 context.sendBroadcast(intent)
             }
         }
